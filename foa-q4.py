@@ -68,14 +68,14 @@ def find_min_connected_components(new_mst,budget,communication_range):
 	for (u,v) in new_mst.edges():
 		new_mst.edges[u,v]['weight'] = ceil((new_mst.edges[u,v]['weight']/communication_range))-1
 		sum_weights+=new_mst.edges[u,v]['weight']
-		print("mst weight")
-		print(new_mst.edges[u,v]['weight'])
+		# print("mst weight")
+		# print(new_mst.edges[u,v]['weight'])
 
 	while(sum_weights > budget):
-		print("Weights")
-		print(sum_weights)
+		# print("Weights")
+		# print(sum_weights)
 		max_edge=max(dict(new_mst.edges).items(), key=lambda x: x[1]['weight'])
-		print("Heyyy removing here", max_edge)
+		# print("Heyyy removing here", max_edge)
 		new_mst.remove_edge(*max_edge[0])
 		sum_weights=0
 		for (u,v) in new_mst.edges():
@@ -111,13 +111,16 @@ def main():
 		G.edges[v,u]['weight'] = distance(sensor_coordinates, u, v)
 		print(u,"-",v,"\t",G.edges[u,v]['weight']) 
 
-	print("##################Networkx Weights#######################")
+	# print("##################Networkx Weights#######################")
 
-	T=nx.minimum_spanning_tree(G,algorithm='prim')
-	print(sorted(T.edges(data=True)))
+	# T=nx.minimum_spanning_tree(G,algorithm='prim')
+	# print(sorted(T.edges(data=True)))
 
 	new_mst=primMST(G)
 	brand_new_mst=find_min_connected_components(new_mst,budget,communication_range)
+
+	print("################## Resultant MST #######################")
+	
 	print(sorted(brand_new_mst.edges(data=True)))
 	# nx.draw(brand_new_mst)
 	
